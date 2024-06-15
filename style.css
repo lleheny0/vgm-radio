@@ -1,0 +1,178 @@
+@font-face {
+  font-family: Pokemon;
+  src: url("assets/pokemon-rs.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+html,
+body {
+  height: 100svh;
+  width: 100vw;
+}
+
+body {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100svh;
+  font-family: "Pokemon";
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+#background > img {
+  width: 100vw;
+  height: 100svh;
+  object-fit: cover;
+  transform: translate3d(0, 0, 0);
+}
+
+#blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: -1;
+  background-color: transparent;
+  backdrop-filter: blur(2vh);
+  -webkit-backdrop-filter: blur(5vh);
+  transform: translate3d(0, 0, 0);
+}
+
+#metadataContainer {
+  padding: 5vh;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10vh);
+  -webkit-backdrop-filter: blur(10vh);
+  transform: translate3d(0, 0, 0);
+}
+
+#metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  color: white;
+  text-indent: 1px;
+  line-height: normal;
+}
+
+#cover {
+  overflow: visible;
+}
+
+#cover > img {
+  height: 25vh;
+  width: 25vh;
+  object-fit: contain;
+  object-position: left bottom;
+  filter: drop-shadow(0 0 2vh rgba(0, 0, 0, 0.5));
+  margin: 5vh;
+}
+
+#gameInfo {
+  font-size: max(5vh, 32px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  /* text-shadow: 3px 3px 0 black; */
+}
+
+#trackInfo {
+  font-size: max(3vh, 20px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  /* text-shadow: 2px 2px 0 black; */
+}
+
+#kirby {
+  width: 10vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5vh;
+}
+
+#controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5vh;
+  background-color: transparent;
+}
+
+.controlButton {
+  height: max(6.25vh, 24px);
+  cursor: pointer;
+  display: inline;
+}
+
+#volumeContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.25vh;
+}
+
+#muted {
+  height: max(5vh, 16px);
+}
+
+#volume {
+  -webkit-appearance: none !important;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: rgb(0, 0, 0, 0.5);
+  height: 1.5vh;
+  width: 20vh;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1vh;
+}
+
+#volume::-moz-range-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  height: 1.5vh;
+  width: 0;
+}
+
+#volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  height: 1.5vh;
+  width: 1.5vh;
+  background-color: white;
+  border-radius: 1vh;
+}
+
+#volume::-moz-range-progress {
+  background-color: white;
+  border-radius: 1vh;
+  height: 100%;
+}

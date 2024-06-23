@@ -172,7 +172,7 @@ const setupControls = () => {
     );
   }
 
-  window.addEventListener("keydown", function (e) {
+  window.addEventListener("keydown", (e) => {
     if (e.key === " ") {
       handleTogglePlayback(audio)();
     }

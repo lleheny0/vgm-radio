@@ -61,8 +61,9 @@ const getDelay = () => {
  * @param {number} metadata.remainingTime - Time left in current track in
  * seconds
  */
-const updateTimer = ({ remainingTime }) =>
+const updateTimer = ({ remainingTime }) => {
   setTimeout(getMetadata, (remainingTime + getDelay()) * 1000);
+};
 
 /**
  * Fetches metadata via PHP script and sends it to the functions expecting it.

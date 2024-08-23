@@ -33,5 +33,6 @@
     "track" => $trackWithTime,
     "cover" => $cover,
     "remainingTime" => $remainingTime,
+    "trackLength" => $time2total,
   ));
 ?>

@@ -65,6 +65,18 @@ const updateTimer = ({ remainingTime }) => {
   setTimeout(getMetadata, (remainingTime + getDelay()) * 1000);
 };
 
+const updateProgressBar = ({ remainingTime, trackLength }) => {
+  if (remainingTime + getDelay() - 1 > 0) {
+    document.getElementById("progressBar").style.width = `${Math.min(
+      ((trackLength - remainingTime - getDelay()) / trackLength) * 100,
+      100
+    )}vw`;
+    setTimeout(() => {
+      updateProgressBar({ remainingTime: remainingTime - 1, trackLength });
+    }, 1000);
+  }
+};
+
 /**
  * Fetches metadata via PHP script and sends it to the functions expecting it.
  * Updates the page with a message for the user if the request returns an

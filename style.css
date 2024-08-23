@@ -92,8 +92,8 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
-  /* text-shadow: 3px 3px 0 black; */
 }
 
 #trackInfo {
@@ -101,16 +101,8 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
-  /* text-shadow: 2px 2px 0 black; */
-}
-
-#kirby {
-  width: 10vh;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 5vh;
 }
 
 #controls {
@@ -175,4 +167,10 @@ body {
   background-color: white;
   border-radius: 1vh;
   height: 100%;
+}
+
+#github {
+  position: absolute;
+  top: 2.5vh;
+  right: 2.5vh;
 }

@@ -202,7 +202,6 @@ const setupControls = () => {
       handleTogglePlayback(audio)();
     }
     if (e.key === "f") {
-      console.log(document.fullscreenEnabled);
       document.fullscreenElement === null
         ? document.documentElement.requestFullscreen()
         : document.exitFullscreen();

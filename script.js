@@ -108,6 +108,8 @@ const getMetadata = () => {
       } catch {
         setServerDown();
       }
+    } else {
+      setServerDown();
     }
   };
   xmlhttp.open("GET", "metadata.php", true);

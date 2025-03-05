@@ -78,6 +78,15 @@ const updateProgressBar = ({ remainingTime, trackLength }) => {
 };
 
 /**
+ * Updates the page to explain the server is down.
+ */
+const setServerDown = () => {
+  document.getElementById("gameInfo").innerHTML = "Music server is down";
+  document.getElementById("trackInfo").innerHTML =
+    "I'm probably updating the library";
+};
+
+/**
  * Fetches metadata via PHP script and sends it to the functions expecting it.
  * Updates the page with a message for the user if the request returns an
  * error.
@@ -87,16 +96,17 @@ const getMetadata = () => {
 
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      const data = JSON.parse(this.responseText);
-
-      if (!data.error) {
-        displayMetadata(data);
-        updateMediaSession(data);
-        updateTimer(data);
-      } else {
-        document.getElementById("gameInfo").innerHTML = "Music server is down";
-        document.getElementById("trackInfo").innerHTML =
-          "I'm probably updating the library";
+      try {
+        const data = JSON.parse(this.responseText);
+        if (!data.error) {
+          displayMetadata(data);
+          updateMediaSession(data);
+          updateTimer(data);
+        } else {
+          setServerDown();
+        }
+      } catch {
+        setServerDown();
       }
     }
   };

@@ -163,12 +163,27 @@ const handleToggleMute = (audio) => () => {
 
 /**
  * Creates and returns a volume change handler
+ * Note: Volume slider is on a logarithmic scale to feel more natural
  *
  * @param {HTMLElement} audio - HTML audio player
  * @returns {function} Sets volume handlers
  */
-const handleChangeVolume = (audio) => (e) => {
+const handleChangeVolumeSlider = (audio) => (e) => {
   audio.volume = e.target.value * e.target.value;
+};
+
+/**
+ * Handles updates to volume when using number keys
+ * Note: Volume slider is on a logarithmic scale to feel more natural
+ *
+ * @param {HTMLElement} audio - HTML audio player
+ * @param {HTMLElement} slider - HTML slider
+ * @param {string} key - Key pressed from event
+ */
+const handleChangeVolumeKey = (audio, slider, key) => {
+  const value = parseInt(key);
+  audio.volume = value ? (value * 0.1) ** 2 : 1;
+  slider.value = value ? value * 0.1 : 1;
 };
 
 /**
@@ -183,7 +198,7 @@ const setupControls = () => {
 
   playPause.onclick = handleTogglePlayback(audio);
   muted.onclick = handleToggleMute(audio);
-  volume.oninput = handleChangeVolume(audio);
+  volume.oninput = handleChangeVolumeSlider(audio);
 
   /**
    * This fixes an iOS Safari bug where the MediaSession info doesn't show up
@@ -210,13 +225,27 @@ const setupControls = () => {
   }
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === " ") {
-      handleTogglePlayback(audio)();
-    }
-    if (e.key === "f") {
-      document.fullscreenElement === null
-        ? document.documentElement.requestFullscreen()
-        : document.exitFullscreen();
+    switch (e.key) {
+      case " ":
+        handleTogglePlayback(audio)();
+        break;
+      case "f":
+        document.fullscreenElement === null
+          ? document.documentElement.requestFullscreen()
+          : document.exitFullscreen();
+        break;
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case "0":
+        handleChangeVolumeKey(audio, volume, e.key);
+        break;
     }
   });
 };

@@ -132,7 +132,7 @@ const handleTogglePlayback = (audio) => () => {
   const playPause = document.getElementById("playPause");
 
   if (audio.paused) {
-    audio.src = `http://leheny.ddns.net:8000/gamemusic?t=${new Date().getTime()}`;
+    audio.src = `http://leheny.ddns.net:8000/vgmradio?t=${new Date().getTime()}`;
     audio.load();
     audio.play();
     playPause.src = "assets/stop.png";

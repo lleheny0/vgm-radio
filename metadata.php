@@ -13,7 +13,7 @@
   $game = $data[0];
   $track = explode(".mp3", $data[1])[0];
 
-  $cover = shell_exec('cat /home/luke/Music/VGM/"' . $game . '"/cover.txt');
+  $cover = shell_exec('cat /home/luke/Music/"' . $game . '"/cover.txt');
 
   $times = explode("/", explode(" ", $lines[1])[4]);
   $time1 = explode(":", $times[0]);

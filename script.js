@@ -95,7 +95,8 @@ const getMetadata = () => {
   const xmlhttp = new XMLHttpRequest();
 
   xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
       try {
         const data = JSON.parse(this.responseText);
         if (!data.error) {
@@ -110,6 +111,7 @@ const getMetadata = () => {
       }
     } else {
       setServerDown();
+      }
     }
   };
   xmlhttp.open("GET", "metadata.php", true);

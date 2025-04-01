@@ -61,8 +61,8 @@ const getDelay = () => {
  * @param {number} metadata.remainingTime - Time left in current track in
  * seconds
  */
-const updateTimer = ({ remainingTime }) => {
-  setTimeout(getMetadata, (remainingTime + getDelay()) * 1000);
+const updateTimer = ({ remaining }) => {
+  setTimeout(getMetadata, (remaining + getDelay()) * 1000);
 };
 
 const updateProgressBar = ({ remainingTime, trackLength }) => {
@@ -87,35 +87,19 @@ const setServerDown = () => {
 };
 
 /**
- * Fetches metadata via PHP script and sends it to the functions expecting it.
- * Updates the page with a message for the user if the request returns an
- * error.
+ * Fetches metadata via Liquidsoap's harbor and sends it to the functions
+ * expecting it. Updates the page with a message for the user if the request
+ * returns an error.
  */
 const getMetadata = () => {
-  const xmlhttp = new XMLHttpRequest();
-
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
-      try {
-        const data = JSON.parse(this.responseText);
-        if (!data.error) {
-          displayMetadata(data);
-          updateMediaSession(data);
-          updateTimer(data);
-        } else {
-          setServerDown();
-        }
-      } catch {
-        setServerDown();
-      }
-    } else {
-      setServerDown();
-      }
-    }
-  };
-  xmlhttp.open("GET", "metadata.php", true);
-  xmlhttp.send();
+  fetch("http://leheny.ddns.net:8080/metadata")
+    .then((resp) => resp.json())
+    .then((data) => {
+      displayMetadata(data);
+      updateMediaSession(data);
+      updateTimer(data);
+    })
+    .catch((err) => setServerDown());
 };
 
 /**

@@ -83,7 +83,7 @@ const updateProgressBar = ({ remainingTime, trackLength }) => {
 const setServerDown = () => {
   document.getElementById("gameInfo").innerHTML = "Music server is down";
   document.getElementById("trackInfo").innerHTML =
-    "I'm probably updating the library";
+    "I'm probably doing maintenance";
 };
 
 /**

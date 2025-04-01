@@ -92,7 +92,7 @@ const setServerDown = () => {
  * returns an error.
  */
 const getMetadata = () => {
-  fetch("http://leheny.ddns.net:8080/metadata")
+  fetch("https://leheny.ddns.net/metadata")
     .then((resp) => resp.json())
     .then((data) => {
       displayMetadata(data);
@@ -118,7 +118,7 @@ const handleTogglePlayback = (audio) => () => {
   const playPause = document.getElementById("playPause");
 
   if (audio.paused) {
-    audio.src = `http://leheny.ddns.net:8000/vgmradio?t=${new Date().getTime()}`;
+    audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;
     audio.load();
     audio.play();
     playPause.src = "assets/stop.png";

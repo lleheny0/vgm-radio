@@ -77,7 +77,7 @@ const getDelay = () => {
  * Sets a timeout for the next metadata fetch
  *
  * @param {Object} metadata - Updated metadata
- * @param {number} metadata.remainingTime - Time left in current track in
+ * @param {number} metadata.remaining - Time left in current track in
  * seconds
  */
 const updateTimer = ({ remaining }) => {

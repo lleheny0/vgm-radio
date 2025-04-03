@@ -1,34 +1,15 @@
 /**
- * Combines the track name with duration in MM:SS format
- *
- * @param {string} metadata.track - Track name
- * @param {number} metadata.duration - Track duration
- *
- * @returns {string} Track name with formatted duration
- */
-getTrackWithDuration = ({ track, duration }) => {
-  const minutes = Math.floor(duration / 60);
-  const seconds = Math.floor(duration % 60);
-
-  return `${track} (${minutes}:${seconds < 10 ? `0${seconds}` : seconds})`;
-};
-
-/**
  * Updates HTML with incoming metadata
  *
  * @param {Object} metadata - Updated metadata
  * @param {string} metadata.track - Track name
  * @param {string} metadata.game - Game name
  * @param {string} metadata.cover - URL to game image
- * @param {number} metadata.duration - Track duration
  */
-const displayMetadata = ({ track, game, cover, duration }) => {
+const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
   document.getElementById("gameInfo").innerHTML = game;
-  document.getElementById("trackInfo").innerHTML = getTrackWithDuration({
-    track,
-    duration,
-  });
+  document.getElementById("trackInfo").innerHTML = track;
   document.getElementById("cover").innerHTML = cover
     ? `<img src="${cover}" />`
     : null;

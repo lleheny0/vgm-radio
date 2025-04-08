@@ -174,12 +174,3 @@ body {
   top: 2.5vh;
   right: 2.5vh;
 }
-
-#progressBar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1vh;
-  background-color: rgba(255, 255, 255, 0.5);
-  transition: width 1s linear;
-}

@@ -65,18 +65,6 @@ const updateTimer = ({ remaining }) => {
   setTimeout(getMetadata, (remaining + getDelay()) * 1000);
 };
 
-const updateProgressBar = ({ remainingTime, trackLength }) => {
-  if (remainingTime + getDelay() - 1 > 0) {
-    document.getElementById("progressBar").style.width = `${Math.min(
-      ((trackLength - remainingTime - getDelay()) / trackLength) * 100,
-      100
-    )}vw`;
-    setTimeout(() => {
-      updateProgressBar({ remainingTime: remainingTime - 1, trackLength });
-    }, 1000);
-  }
-};
-
 /**
  * Updates the page to explain the server is down.
  */

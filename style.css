@@ -32,9 +32,6 @@ body {
   top: 0;
   left: 0;
   z-index: -2;
-}
-
-#background > img {
   width: 100vw;
   height: 100dvh;
   object-fit: cover;
@@ -75,7 +72,7 @@ body {
   line-height: normal;
 }
 
-#cover > img {
+#cover {
   height: 25vh;
   width: 25vh;
   object-fit: contain;

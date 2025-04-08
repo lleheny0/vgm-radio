@@ -9,12 +9,8 @@ const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
   document.getElementById("gameInfo").innerHTML = game;
   document.getElementById("trackInfo").innerHTML = track;
-  document.getElementById("cover").innerHTML = cover
-    ? `<img src="${cover}" />`
-    : null;
-  document.getElementById("background").innerHTML = cover
-    ? `<img src="${cover}" />`
-    : null;
+  document.getElementById("cover").src = cover;
+  document.getElementById("background").src = cover;
 };
 
 /**
@@ -47,9 +43,9 @@ const updateMediaSession = ({ track, game, cover }) => {
  */
 const getDelay = () => {
   const { currentTime, duration } = document.getElementById("audio");
-  const delay = Math.ceil(duration - currentTime);
+  const delay = isFinite(duration) ? duration - currentTime : 4;
 
-  return isFinite(delay) ? delay : 4;
+  return delay;
 };
 
 /**
@@ -68,6 +64,7 @@ const setServerDown = () => {
   document.getElementById("gameInfo").innerHTML = "Music server is down";
   document.getElementById("trackInfo").innerHTML =
     "I'm probably doing maintenance";
+  document.getElementById("cover").innerHTML = null;
 };
 
 /**

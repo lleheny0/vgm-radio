@@ -8,6 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 html,
@@ -38,6 +39,7 @@ body {
   height: 100dvh;
   object-fit: cover;
   transform: translate3d(0, 0, 0);
+  margin-top: -3px;
 }
 
 #blur {

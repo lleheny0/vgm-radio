@@ -146,10 +146,10 @@ const handleChangeVolumeSlider = (e) => {
 const handleChangeVolumeKey = (key) => {
   const audio = document.getElementById("audio");
   const volume = document.getElementById("volume");
-  const value = parseInt(key);
+  const value = key / 10 || 1;
 
-  audio.volume = value ? (value * 0.1) ** 2 : 1;
-  volume.value = value ? value * 0.1 : 1;
+  audio.volume = value ** 2;
+  volume.value = value;
 };
 
 /**

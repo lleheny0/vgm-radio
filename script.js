@@ -195,6 +195,9 @@ const setupControls = () => {
           ? document.documentElement.requestFullscreen()
           : document.exitFullscreen();
         break;
+      case "m":
+        handleToggleMute();
+        break;
       case "1":
       case "2":
       case "3":

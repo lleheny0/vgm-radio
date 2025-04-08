@@ -39,6 +39,11 @@ const updateMediaSession = ({ track, game, cover }) => {
  * currentTime from the duration, defaulting to 4. isFinite is used to protect
  * against either of the numbers being infinite.
  *
+ * Note: On Chromium-based browsers, audio.duration = Infinity, whereas on
+ * Firefox-based browsers, audio.duration will be equal to the buffered length.
+ * Chrome buffers for a longer time than Firefox, so the metadata will show up
+ * a little early until this can be remedied.
+ *
  * @returns {number} Current delay amount in seconds
  */
 const getDelay = () => {

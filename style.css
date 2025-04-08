@@ -12,7 +12,7 @@
 
 html,
 body {
-  height: 100svh;
+  height: 100dvh;
   width: 100vw;
 }
 
@@ -22,7 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  height: 100svh;
+  height: 100dvh;
   font-family: "Pokemon";
 }
 
@@ -36,7 +36,7 @@ body {
 
 #background > img {
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
   object-fit: cover;
   transform: translate3d(0, 0, 0);
 }
@@ -46,7 +46,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
   z-index: -1;
   background-color: transparent;
   backdrop-filter: blur(2vh);

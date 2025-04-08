@@ -1,10 +1,9 @@
 /**
- * Updates HTML with incoming metadata
+ * Updates HTML with incoming metadata.
  *
- * @param {Object} metadata - Updated metadata
- * @param {string} metadata.track - Track name
- * @param {string} metadata.game - Game name
- * @param {string} metadata.cover - URL to game image
+ * @param {string} track - Track name
+ * @param {string} game - Game name
+ * @param {string} cover - URL to game image
  */
 const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
@@ -19,12 +18,11 @@ const displayMetadata = ({ track, game, cover }) => {
 };
 
 /**
- * Updates MediaSession with incoming metadata
+ * Updates MediaSession with incoming metadata.
  *
- * @param {Object} metadata - Updated metadata
- * @param {string} metadata.track - Track name
- * @param {string} metadata.game - Game name
- * @param {string} metadata.cover - URL to game image
+ * @param {string} track - Track name
+ * @param {string} game - Game name
+ * @param {string} cover - URL to game image
  */
 const updateMediaSession = ({ track, game, cover }) => {
   if ("mediaSession" in navigator) {
@@ -55,11 +53,9 @@ const getDelay = () => {
 };
 
 /**
- * Sets a timeout for the next metadata fetch
+ * Sets a timeout for the next metadata fetch.
  *
- * @param {Object} metadata - Updated metadata
- * @param {number} metadata.remaining - Time left in current track in
- * seconds
+ * @param {number} remaining - Time left in current track in seconds
  */
 const updateTimer = ({ remaining }) => {
   setTimeout(getMetadata, (remaining + getDelay()) * 1000);
@@ -91,18 +87,16 @@ const getMetadata = () => {
 };
 
 /**
- * Creates and returns a toggle playback handler
+ * Handles toggling playback when play/pause button is clicked.
  *
  * Important note:
  * "Paused" state here is actually closer to "stopped". Setting the audio.src
  * to "" ensures that when audio is resumed it gets set to the "live" stream
  * rather than the time it was paused at. This helps prevent any unusual
  * stuttering or glitchiness after unpausing.
- *
- * @param {HTMLElement} audio - HTML audio player
- * @returns {function} Sets playback handlers
  */
-const handleTogglePlayback = (audio) => () => {
+const handleTogglePlayback = () => {
+  const audio = document.getElementById("audio");
   const playPause = document.getElementById("playPause");
 
   if (audio.paused) {
@@ -118,12 +112,10 @@ const handleTogglePlayback = (audio) => () => {
 };
 
 /**
- * Creates and returns a mute/unmute handler
- *
- * @param {HTMLElement} audio - HTML audio player
- * @returns {function} Sets mute handlers
+ * Handles toggling mute when mute button is clicked.
  */
-const handleToggleMute = (audio) => () => {
+const handleToggleMute = () => {
+  const audio = document.getElementById("audio");
   const muted = document.getElementById("muted");
 
   if (audio.muted) {
@@ -136,33 +128,34 @@ const handleToggleMute = (audio) => () => {
 };
 
 /**
- * Creates and returns a volume change handler
- * Note: Volume slider is on a logarithmic scale to feel more natural
- *
- * @param {HTMLElement} audio - HTML audio player
- * @returns {function} Sets volume handlers
+ * Handles updating the volume via the slider.
+ * Note: Volume is on a logarithmic scale to feel more natural.
  */
-const handleChangeVolumeSlider = (audio) => (e) => {
-  audio.volume = e.target.value * e.target.value;
+const handleChangeVolumeSlider = (e) => {
+  const audio = document.getElementById("audio");
+
+  audio.volume = e.target.value ** 2;
 };
 
 /**
- * Handles updates to volume when using number keys
- * Note: Volume slider is on a logarithmic scale to feel more natural
+ * Handles updating the volume via the number keys.
+ * Note: Volume is on a logarithmic scale to feel more natural.
  *
- * @param {HTMLElement} audio - HTML audio player
- * @param {HTMLElement} slider - HTML slider
  * @param {string} key - Key pressed from event
  */
-const handleChangeVolumeKey = (audio, slider, key) => {
+const handleChangeVolumeKey = (key) => {
+  const audio = document.getElementById("audio");
+  const volume = document.getElementById("volume");
   const value = parseInt(key);
+
   audio.volume = value ? (value * 0.1) ** 2 : 1;
-  slider.value = value ? value * 0.1 : 1;
+  volume.value = value ? value * 0.1 : 1;
 };
 
 /**
  * Sets handlers for everything interactable on the page. Adds event listeners
- * for keyboard events. Spacebar toggles playback, F toggles fullscreen.
+ * for keyboard events. Spacebar toggles playback, F toggles fullscreen,
+ * number keys set volume.
  */
 const setupControls = () => {
   const audio = document.getElementById("audio");
@@ -170,9 +163,9 @@ const setupControls = () => {
   const muted = document.getElementById("muted");
   const volume = document.getElementById("volume");
 
-  playPause.onclick = handleTogglePlayback(audio);
-  muted.onclick = handleToggleMute(audio);
-  volume.oninput = handleChangeVolumeSlider(audio);
+  playPause.onclick = handleTogglePlayback;
+  muted.onclick = handleToggleMute;
+  volume.oninput = handleChangeVolumeSlider;
 
   /**
    * This fixes an iOS Safari bug where the MediaSession info doesn't show up
@@ -188,20 +181,14 @@ const setupControls = () => {
   };
 
   if ("mediaSession" in navigator) {
-    navigator.mediaSession.setActionHandler(
-      "play",
-      handleTogglePlayback(audio)
-    );
-    navigator.mediaSession.setActionHandler(
-      "pause",
-      handleTogglePlayback(audio)
-    );
+    navigator.mediaSession.setActionHandler("play", handleTogglePlayback);
+    navigator.mediaSession.setActionHandler("pause", handleTogglePlayback);
   }
 
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case " ":
-        handleTogglePlayback(audio)();
+        handleTogglePlayback();
         break;
       case "f":
         document.fullscreenElement === null
@@ -218,7 +205,7 @@ const setupControls = () => {
       case "8":
       case "9":
       case "0":
-        handleChangeVolumeKey(audio, volume, e.key);
+        handleChangeVolumeKey(e.key);
         break;
     }
   });

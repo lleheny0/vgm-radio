@@ -66,7 +66,7 @@ const setServerDown = () => {
   document.getElementById("gameInfo").innerHTML = "Music server is down";
   document.getElementById("trackInfo").innerHTML =
     "I'm probably doing maintenance";
-  document.getElementById("cover").innerHTML = null;
+  document.getElementById("cover").src = null;
 };
 
 /**

@@ -92,7 +92,7 @@ const getMetadata = () => {
 /**
  * Handles toggling playback when play/pause button is clicked.
  *
- * Important note:
+ * Note:
  * "Paused" state here is actually closer to "stopped". Setting the audio.src
  * to "" ensures that when audio is resumed it gets set to the "live" stream
  * rather than the time it was paused at. This helps prevent any unusual
@@ -132,7 +132,9 @@ const handleToggleMute = () => {
 
 /**
  * Handles updating the volume via the slider.
- * Note: Volume is on a logarithmic scale to feel more natural.
+ *
+ * Note:
+ * Volume is on a logarithmic scale to feel more natural.
  */
 const handleChangeVolumeSlider = (e) => {
   const audio = document.getElementById("audio");
@@ -142,7 +144,9 @@ const handleChangeVolumeSlider = (e) => {
 
 /**
  * Handles updating the volume via the number keys.
- * Note: Volume is on a logarithmic scale to feel more natural.
+ *
+ * Note:
+ * Volume is on a logarithmic scale to feel more natural.
  *
  * @param {string} key - Key pressed from event
  */

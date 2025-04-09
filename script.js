@@ -177,10 +177,12 @@ const setupControls = () => {
    * TODO: delve deeper and discover where the actual race condition exists.
    */
   audio.onplaying = () => {
-    audio.muted = true;
-    setTimeout(() => {
-      audio.muted = false;
-    }, 1000);
+    if (!audio.muted) {
+      audio.muted = true;
+      setTimeout(() => {
+        audio.muted = false;
+      }, 1000);
+    }
   };
 
   if ("mediaSession" in navigator) {

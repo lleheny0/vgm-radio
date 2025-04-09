@@ -25,11 +25,7 @@ const updateMediaSession = ({ track, game, cover }) => {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: track,
       artist: game,
-      artwork: [
-        {
-          src: cover,
-        },
-      ],
+      artwork: [{ src: cover }],
     });
   }
 };

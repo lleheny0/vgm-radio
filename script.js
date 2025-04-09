@@ -6,9 +6,9 @@
  * @param {string} cover - URL to game image
  */
 const displayMetadata = ({ track, game, cover }) => {
-  document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
-  document.getElementById("gameInfo").innerHTML = game;
-  document.getElementById("trackInfo").innerHTML = track;
+  document.getElementById("pagetitle").innerText = `♫ ${game}`;
+  document.getElementById("gameInfo").innerText = game;
+  document.getElementById("trackInfo").innerText = track;
   document.getElementById("cover").src = cover;
   document.getElementById("background").src = cover;
 };
@@ -63,8 +63,8 @@ const updateTimer = ({ remaining }) => {
  * Updates the page to explain the server is down.
  */
 const setServerDown = () => {
-  document.getElementById("gameInfo").innerHTML = "Music server is down";
-  document.getElementById("trackInfo").innerHTML =
+  document.getElementById("gameInfo").innerText = "Music server is down";
+  document.getElementById("trackInfo").innerText =
     "I'm probably doing maintenance";
   document.getElementById("cover").src = null;
 };

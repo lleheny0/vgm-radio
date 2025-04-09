@@ -36,19 +36,20 @@ const updateMediaSession = ({ track, game, cover }) => {
 
 /**
  * Determines current delay of audio stream in seconds by subtracting the
- * currentTime from the duration, defaulting to 4. isFinite is used to protect
- * against either of the numbers being infinite.
+ * currentTime from the duration, defaulting to 8.5 on Chrome and 4 elsewhere.
  *
- * Note: On Chromium-based browsers, audio.duration = Infinity, whereas on
- * Firefox-based browsers, audio.duration will be equal to the buffered length.
- * Chrome buffers for a longer time than Firefox, so the metadata will show up
- * a little early until this can be remedied.
+ * Note:
+ * On Chrome, audio buffers for a longer time before playing than on Firefox,
+ * so it has a hard-coded 8.5 second delay until a better solution presents
+ * itself.
  *
  * @returns {number} Current delay amount in seconds
  */
 const getDelay = () => {
-  const { currentTime, duration } = document.getElementById("audio");
-  const delay = isFinite(duration) ? duration - currentTime : 4;
+  const { currentTime, buffered } = document.getElementById("audio");
+  const delay = navigator.userAgent.includes("Chrome")
+    ? 8.5
+    : (buffered.length && buffered.end(0) - currentTime) || 4;
 
   return delay;
 };

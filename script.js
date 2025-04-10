@@ -63,11 +63,19 @@ const updateTimer = ({ remaining }) => {
  * Updates the page to explain the server is down.
  */
 const setServerDown = () => {
-  document.getElementById("gameInfo").innerText = "Music server is down";
-  document.getElementById("trackInfo").innerText =
-    "I'm probably doing maintenance";
-  document.getElementById("cover").src = "./assets/fallback.png";
-  document.getElementById("background").src = "./assets/fallback.png";
+  const gameInfo = document.getElementById("gameInfo");
+  const trackInfo = document.getElementById("trackInfo");
+  const cover = document.getElementById("cover");
+  const background = document.getElementById("background");
+
+  gameInfo.innerText = "Music server is down";
+  trackInfo.innerText = "I'm probably doing maintenance";
+  cover.src = "./assets/fallback.png";
+  background.src = "./assets/fallback.png";
+
+  setTimeout(() => {
+    getMetadata().then(handleTogglePlayback);
+  }, 60000);
 };
 
 /**

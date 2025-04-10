@@ -169,6 +169,8 @@ const handleToggleMute = () => {
  *
  * Note:
  * Volume is on a logarithmic scale to feel more natural.
+ *
+ * @param {Event} e - Event from slider value change.
  */
 const handleChangeVolumeSlider = (e) => {
   audio.volume = e.target.value ** 2;

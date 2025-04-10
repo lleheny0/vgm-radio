@@ -119,6 +119,10 @@ const getMetadata = () => {
 
 /**
  * Handles playing the audio.
+ *
+ * Note:
+ * Adding ?t=[current time] to the URL ensures that the stream will not load
+ * a leftover cache from a previous stream.
  */
 const handlePlay = () => {
   audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;

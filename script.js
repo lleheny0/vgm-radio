@@ -29,9 +29,9 @@ const loadElements = () => {
 /**
  * Updates HTML with incoming metadata.
  *
- * @param {string} track - Track name
- * @param {string} game - Game name
- * @param {string} cover - URL to game image
+ * @param {String} track - Track name
+ * @param {String} game - Game name
+ * @param {String} cover - URL to game image
  */
 const displayMetadata = ({ track, game, cover }) => {
   pageTitle.innerText = `♫ ${game}`;
@@ -44,9 +44,9 @@ const displayMetadata = ({ track, game, cover }) => {
 /**
  * Updates MediaSession with incoming metadata.
  *
- * @param {string} track - Track name
- * @param {string} game - Game name
- * @param {string} cover - URL to game image
+ * @param {String} track - Track name
+ * @param {String} game - Game name
+ * @param {String} cover - URL to game image
  */
 const updateMediaSession = ({ track, game, cover }) => {
   if ("mediaSession" in navigator) {
@@ -67,7 +67,7 @@ const updateMediaSession = ({ track, game, cover }) => {
  * so it has a hard-coded 8.5 second delay until a better solution presents
  * itself.
  *
- * @returns {number} Current delay amount in seconds
+ * @returns {Number} Current delay amount in seconds
  */
 const getDelay = () => {
   const { currentTime, buffered } = audio;
@@ -81,7 +81,7 @@ const getDelay = () => {
 /**
  * Sets a timeout for the next metadata fetch.
  *
- * @param {number} remaining - Time left in current track in seconds
+ * @param {Number} remaining - Time left in current track in seconds
  */
 const updateTimer = ({ remaining }) => {
   setTimeout(getMetadata, (remaining + getDelay()) * 1000);
@@ -182,7 +182,7 @@ const handleChangeVolumeSlider = (e) => {
  * Note:
  * Volume is on a logarithmic scale to feel more natural.
  *
- * @param {string} key - Key pressed from event
+ * @param {String} key - Key pressed from event
  */
 const handleChangeVolumeKey = (key) => {
   const value = key / 10 || 1;

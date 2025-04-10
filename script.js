@@ -1,4 +1,32 @@
 /**
+ * Defines selector variables.
+ */
+let audio,
+  background,
+  cover,
+  gameInfo,
+  muted,
+  pageTitle,
+  playPause,
+  trackInfo,
+  volume;
+
+/**
+ * Assigns elements to selector variables.
+ */
+const loadElements = () => {
+  audio = document.getElementById("audio");
+  background = document.getElementById("background");
+  cover = document.getElementById("cover");
+  gameInfo = document.getElementById("gameInfo");
+  muted = document.getElementById("muted");
+  pageTitle = document.getElementById("pageTitle");
+  playPause = document.getElementById("playPause");
+  trackInfo = document.getElementById("trackInfo");
+  volume = document.getElementById("volume");
+};
+
+/**
  * Updates HTML with incoming metadata.
  *
  * @param {string} track - Track name
@@ -6,11 +34,11 @@
  * @param {string} cover - URL to game image
  */
 const displayMetadata = ({ track, game, cover }) => {
-  document.getElementById("pagetitle").innerText = `♫ ${game}`;
-  document.getElementById("gameInfo").innerText = game;
-  document.getElementById("trackInfo").innerText = track;
-  document.getElementById("cover").src = cover;
-  document.getElementById("background").src = cover;
+  pageTitle.innerText = `♫ ${game}`;
+  gameInfo.innerText = game;
+  trackInfo.innerText = track;
+  this.cover.src = cover;
+  background.src = cover;
 };
 
 /**
@@ -42,7 +70,7 @@ const updateMediaSession = ({ track, game, cover }) => {
  * @returns {number} Current delay amount in seconds
  */
 const getDelay = () => {
-  const { currentTime, buffered } = document.getElementById("audio");
+  const { currentTime, buffered } = audio;
   const delay = navigator.userAgent.includes("Chrome")
     ? 8.5
     : (buffered.length && buffered.end(0) - currentTime) || 4;
@@ -63,11 +91,6 @@ const updateTimer = ({ remaining }) => {
  * Updates the page to explain the server is down.
  */
 const setServerDown = () => {
-  const gameInfo = document.getElementById("gameInfo");
-  const trackInfo = document.getElementById("trackInfo");
-  const cover = document.getElementById("cover");
-  const background = document.getElementById("background");
-
   gameInfo.innerText = "Music server is down";
   trackInfo.innerText = "I'm probably doing maintenance";
   cover.src = "./assets/fallback.png";
@@ -104,9 +127,6 @@ const getMetadata = () => {
  * stuttering or glitchiness after unpausing.
  */
 const handleTogglePlayback = () => {
-  const audio = document.getElementById("audio");
-  const playPause = document.getElementById("playPause");
-
   if (audio.paused) {
     audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;
     audio.load();
@@ -123,9 +143,6 @@ const handleTogglePlayback = () => {
  * Handles toggling mute when mute button is clicked.
  */
 const handleToggleMute = () => {
-  const audio = document.getElementById("audio");
-  const muted = document.getElementById("muted");
-
   if (audio.muted) {
     audio.muted = false;
     muted.src = "assets/unmuted.png";
@@ -142,8 +159,6 @@ const handleToggleMute = () => {
  * Volume is on a logarithmic scale to feel more natural.
  */
 const handleChangeVolumeSlider = (e) => {
-  const audio = document.getElementById("audio");
-
   audio.volume = e.target.value ** 2;
 };
 
@@ -156,8 +171,6 @@ const handleChangeVolumeSlider = (e) => {
  * @param {string} key - Key pressed from event
  */
 const handleChangeVolumeKey = (key) => {
-  const audio = document.getElementById("audio");
-  const volume = document.getElementById("volume");
   const value = key / 10 || 1;
 
   audio.volume = value ** 2;
@@ -170,11 +183,6 @@ const handleChangeVolumeKey = (key) => {
  * number keys set volume.
  */
 const setupControls = () => {
-  const audio = document.getElementById("audio");
-  const playPause = document.getElementById("playPause");
-  const muted = document.getElementById("muted");
-  const volume = document.getElementById("volume");
-
   playPause.onclick = handleTogglePlayback;
   muted.onclick = handleToggleMute;
   volume.oninput = handleChangeVolumeSlider;
@@ -232,6 +240,7 @@ const setupControls = () => {
  * Runs init functions after window loads.
  */
 window.onload = () => {
+  loadElements();
   getMetadata();
   setupControls();
 };

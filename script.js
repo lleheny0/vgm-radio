@@ -7,7 +7,7 @@ let audio,
   gameInfo,
   muted,
   pageTitle,
-  playPause,
+  playStop,
   trackInfo,
   volume;
 
@@ -21,7 +21,7 @@ const loadElements = () => {
   gameInfo = document.getElementById("gameInfo");
   muted = document.getElementById("muted");
   pageTitle = document.getElementById("pageTitle");
-  playPause = document.getElementById("playPause");
+  playStop = document.getElementById("playStop");
   trackInfo = document.getElementById("trackInfo");
   volume = document.getElementById("volume");
 };
@@ -124,29 +124,28 @@ const handlePlay = () => {
   audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;
   audio.load();
   audio.play();
-  playPause.src = "assets/stop.png";
+  playStop.src = "assets/stop.png";
 };
 
 /**
  * Handles pausing the audio.
  *
  * Note:
- * "Paused" state here is actually closer to "stopped". Setting the audio.src
- * to "" ensures that when audio is resumed it gets set to the "live" stream
- * rather than the time it was paused at. This helps prevent any unusual
- * stuttering or glitchiness after unpausing.
+ * Setting the audio.src to "" ensures that when audio is resumed it gets set
+ * to the "live" stream rather than the time it was stopped at. This helps
+ * prevent any unusual stuttering or glitchiness when playing again.
  */
-const handlePause = () => {
+const handleStop = () => {
   audio.pause();
   audio.src = "";
-  playPause.src = "assets/play.png";
+  playStop.src = "assets/play.png";
 };
 
 /**
- * Handles toggling playback when play/pause button is clicked.
+ * Handles toggling playback when play/stop button is clicked.
  */
 const handleTogglePlayback = () => {
-  audio.paused ? handlePlay() : handlePause();
+  audio.paused ? handlePlay() : handleStop();
 };
 
 /**
@@ -193,7 +192,7 @@ const handleChangeVolumeKey = (key) => {
  * number keys set volume.
  */
 const setupControls = () => {
-  playPause.onclick = handleTogglePlayback;
+  playStop.onclick = handleTogglePlayback;
   muted.onclick = handleToggleMute;
   volume.oninput = handleChangeVolumeSlider;
 
@@ -214,7 +213,7 @@ const setupControls = () => {
 
   if ("mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("play", handlePlay);
-    navigator.mediaSession.setActionHandler("pause", handlePause);
+    navigator.mediaSession.setActionHandler("pause", handleStop);
   }
 
   window.addEventListener("keydown", (e) => {

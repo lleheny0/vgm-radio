@@ -135,9 +135,8 @@ const handlePlay = () => {
  * Handles pausing the audio.
  *
  * Note:
- * Setting the audio.src to "" ensures that when audio is resumed it gets set
- * to the "live" stream rather than the time it was stopped at. This helps
- * prevent any unusual stuttering or glitchiness when playing again.
+ * Setting the audio.src to "" stops the stream from continuing to buffer.
+ * This prevents any glitchiness when playing again.
  */
 const handleStop = () => {
   audio.pause();

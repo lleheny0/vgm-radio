@@ -196,21 +196,6 @@ const setupControls = () => {
   muted.onclick = handleToggleMute;
   volume.oninput = handleChangeVolumeSlider;
 
-  /**
-   * This fixes an iOS Safari bug where the MediaSession info doesn't show up
-   * correctly on the lock screen on first play.
-   *
-   * TODO: delve deeper and discover where the actual race condition exists.
-   */
-  audio.onplaying = () => {
-    if (!audio.muted) {
-      audio.muted = true;
-      setTimeout(() => {
-        audio.muted = false;
-      }, 1000);
-    }
-  };
-
   if ("mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("play", handlePlay);
     navigator.mediaSession.setActionHandler("pause", handleStop);

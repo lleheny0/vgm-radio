@@ -17,7 +17,7 @@ let audio,
 const loadElements = () => {
   audio = document.getElementById("audio");
   background = document.getElementById("background");
-  cover = document.getElementById("cover");
+  coverArt = document.getElementById("coverArt");
   gameInfo = document.getElementById("gameInfo");
   muted = document.getElementById("muted");
   pageTitle = document.getElementById("pageTitle");
@@ -37,7 +37,7 @@ const displayMetadata = ({ track, game, cover }) => {
   pageTitle.innerText = `♫ ${game}`;
   gameInfo.innerText = game;
   trackInfo.innerText = track;
-  this.cover.src = cover;
+  coverArt.src = cover;
   background.src = cover;
 };
 
@@ -93,7 +93,7 @@ const updateTimer = ({ remaining }) => {
 const setServerDown = () => {
   gameInfo.innerText = "Music server is down";
   trackInfo.innerText = "I'm probably doing maintenance";
-  cover.src = "./assets/fallback.png";
+  coverArt.src = "./assets/fallback.png";
   background.src = "./assets/fallback.png";
 
   setTimeout(() => {

@@ -118,7 +118,17 @@ const getMetadata = () => {
 };
 
 /**
- * Handles toggling playback when play/pause button is clicked.
+ * Handles playing the audio.
+ */
+const handlePlay = () => {
+  audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;
+  audio.load();
+  audio.play();
+  playPause.src = "assets/stop.png";
+};
+
+/**
+ * Handles pausing the audio.
  *
  * Note:
  * "Paused" state here is actually closer to "stopped". Setting the audio.src
@@ -126,17 +136,17 @@ const getMetadata = () => {
  * rather than the time it was paused at. This helps prevent any unusual
  * stuttering or glitchiness after unpausing.
  */
+const handlePause = () => {
+  audio.pause();
+  audio.src = "";
+  playPause.src = "assets/play.png";
+};
+
+/**
+ * Handles toggling playback when play/pause button is clicked.
+ */
 const handleTogglePlayback = () => {
-  if (audio.paused) {
-    audio.src = `https://leheny.ddns.net/vgmradio?t=${new Date().getTime()}`;
-    audio.load();
-    audio.play();
-    playPause.src = "assets/stop.png";
-  } else {
-    audio.pause();
-    audio.src = "";
-    playPause.src = "assets/play.png";
-  }
+  audio.paused ? handlePlay() : handlePause();
 };
 
 /**
@@ -203,8 +213,8 @@ const setupControls = () => {
   };
 
   if ("mediaSession" in navigator) {
-    navigator.mediaSession.setActionHandler("play", handleTogglePlayback);
-    navigator.mediaSession.setActionHandler("pause", handleTogglePlayback);
+    navigator.mediaSession.setActionHandler("play", handlePlay);
+    navigator.mediaSession.setActionHandler("pause", handlePause);
   }
 
   window.addEventListener("keydown", (e) => {

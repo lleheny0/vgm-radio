@@ -193,9 +193,7 @@ const handleChangeVolumeKey = (key) => {
 };
 
 /**
- * Sets handlers for everything interactable on the page. Adds event listeners
- * for keyboard events. Spacebar toggles playback, F toggles fullscreen,
- * number keys set volume.
+ * Sets handlers for user interactable controls on the page.
  */
 const setupControls = () => {
   playStop.onclick = handleTogglePlayback;
@@ -206,7 +204,12 @@ const setupControls = () => {
     navigator.mediaSession.setActionHandler("play", handlePlay);
     navigator.mediaSession.setActionHandler("pause", handleStop);
   }
+};
 
+/**
+ * Adds event listeners.
+ */
+const setupEventListeners = () => {
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case " ":
@@ -243,4 +246,5 @@ window.onload = () => {
   loadElements();
   getMetadata();
   setupControls();
+  setupEventListeners();
 };

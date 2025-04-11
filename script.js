@@ -96,8 +96,9 @@ const setServerDown = () => {
   coverArt.src = "./assets/fallback.png";
   background.src = "./assets/fallback.png";
 
+  handleStop();
   setTimeout(() => {
-    getMetadata().then(handleTogglePlayback);
+    getMetadata();
   }, 60000);
 };
 

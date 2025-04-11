@@ -237,6 +237,8 @@ const setupEventListeners = () => {
         break;
     }
   });
+
+  audio.addEventListener("ended", setServerDown);
 };
 
 /**

@@ -199,11 +199,6 @@ const setupControls = () => {
   playStop.onclick = handleTogglePlayback;
   muted.onclick = handleToggleMute;
   volume.oninput = handleChangeVolumeSlider;
-
-  if ("mediaSession" in navigator) {
-    navigator.mediaSession.setActionHandler("play", handlePlay);
-    navigator.mediaSession.setActionHandler("pause", handleStop);
-  }
 };
 
 /**
@@ -239,6 +234,11 @@ const setupEventListeners = () => {
   });
 
   audio.addEventListener("ended", setServerDown);
+
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.setActionHandler("play", handlePlay);
+    navigator.mediaSession.setActionHandler("pause", handleStop);
+  }
 };
 
 /**

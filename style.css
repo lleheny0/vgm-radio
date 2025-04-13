@@ -168,13 +168,10 @@ body {
   height: 100%;
 }
 
-#source {
+#github > img {
   position: absolute;
   top: 5vh;
   right: 5vh;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: white;
-  font-size: 2vh;
+  width: 5vh;
+  height: 5vh;
 }

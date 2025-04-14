@@ -235,6 +235,7 @@ const setupEventListeners = () => {
     }
   });
 
+  audio.addEventListener("pause", handleStop);
   audio.addEventListener("ended", setServerDown);
 
   if ("mediaSession" in navigator) {

@@ -135,7 +135,7 @@ const handlePlay = () => {
 };
 
 /**
- * Handles pausing the audio.
+ * Handles stopping the audio.
  *
  * Note:
  * Setting the audio.src to null stops the stream from continuing to buffer.

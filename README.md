@@ -2,7 +2,7 @@
 
 Hosted at [leheny.ddns.net](http://leheny.ddns.net/)
 
-![image](https://github.com/user-attachments/assets/52be36e7-9356-402c-b41f-d57bfb18eea9)
+![image](https://github.com/user-attachments/assets/76fab797-4ff4-40dc-9db4-5d92fe47793b)
 
 ## Background
 

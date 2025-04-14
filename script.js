@@ -4,6 +4,7 @@
 let audio,
   background,
   cover,
+  debug,
   gameInfo,
   muted,
   pageTitle,
@@ -18,6 +19,7 @@ const loadElements = () => {
   audio = document.getElementById("audio");
   background = document.getElementById("background");
   coverArt = document.getElementById("coverArt");
+  debug = document.getElementById("debug");
   gameInfo = document.getElementById("gameInfo");
   muted = document.getElementById("muted");
   pageTitle = document.getElementById("pageTitle");

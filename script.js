@@ -138,12 +138,12 @@ const handlePlay = () => {
  * Handles pausing the audio.
  *
  * Note:
- * Setting the audio.src to "" stops the stream from continuing to buffer.
+ * Setting the audio.src to null stops the stream from continuing to buffer.
  * This prevents any glitchiness when playing again.
  */
 const handleStop = () => {
   audio.pause();
-  audio.src = "";
+  audio.src = null;
   playStop.src = "assets/play.png";
 };
 

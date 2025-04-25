@@ -72,18 +72,13 @@ body {
   line-height: normal;
 }
 
-#coverArt {
-  visibility: hidden;
+#coverArt > img {
   height: 25vh;
   width: 25vh;
   object-fit: contain;
   object-position: left bottom;
   filter: drop-shadow(0 0 2vh rgba(0, 0, 0, 0.5));
   margin: 5vh;
-}
-
-#coverArt[src] {
-  visibility: visible;
 }
 
 #gameInfo {

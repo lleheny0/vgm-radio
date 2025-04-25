@@ -39,7 +39,7 @@ const displayMetadata = ({ track, game, cover }) => {
   pageTitle.innerText = `♫ ${game}`;
   gameInfo.innerText = game;
   trackInfo.innerText = track;
-  coverArt.src = cover;
+  coverArt.innerHTML = `<img src="${cover}" />`;
   background.src = cover;
 };
 
@@ -95,7 +95,7 @@ const updateTimer = ({ remaining }) => {
 const setServerDown = () => {
   gameInfo.innerText = "Music server is down";
   trackInfo.innerText = "I'm probably doing maintenance";
-  coverArt.src = "./assets/fallback.png";
+  coverArt.innerHTML = `<img src="./assets/fallback.png" />`;
   background.src = "./assets/fallback.png";
 
   handleStop();

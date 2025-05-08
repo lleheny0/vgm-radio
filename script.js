@@ -208,6 +208,8 @@ const setupControls = () => {
  */
 const setupEventListeners = () => {
   window.addEventListener("keydown", (e) => {
+    if (e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) return;
+
     switch (e.key) {
       case " ":
         handleTogglePlayback();

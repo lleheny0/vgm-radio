@@ -98,7 +98,6 @@ const setServerDown = () => {
   coverArt.innerHTML = `<img src="./assets/fallback.png" />`;
   background.src = "./assets/fallback.png";
 
-  handleStop();
   setTimeout(() => {
     getMetadata();
   }, 60000);

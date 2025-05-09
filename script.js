@@ -244,6 +244,11 @@ const setupEventListeners = () => {
   navigator.mediaSession?.setActionHandler("pause", handleStop);
 };
 
+const debugApp = () => {
+  if (new URLSearchParams(window.location.search).has("debug")) {
+  }
+};
+
 /**
  * Runs init functions after window loads.
  */
@@ -252,4 +257,5 @@ window.onload = () => {
   getMetadata();
   setupControls();
   setupEventListeners();
+  debugApp();
 };

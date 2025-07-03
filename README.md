@@ -31,4 +31,4 @@ The frontend plays Icecast's audio broadcast and periodically fetches metadata f
 
 ## Backend
 
-Backend is running [Liquidsoap](https://www.liquidsoap.info/) over [Icecast](https://icecast.org/) using [this config](https://github.com/lleheny0/nixos-config/blob/main/modules/server/dotfiles/vgm-stream.liq). Liquidsoap shuffles and plays the entire library of songs, outputting to Icecast. Icecast then broadcasts this audio to the internet. Liquidsoap's harbor is an HTTP server that is configured to pull the current song's metadata and massage it into the simple form expected by the frontend.
+Backend is running [Liquidsoap](https://www.liquidsoap.info/) over [Icecast](https://icecast.org/) using [this config](https://github.com/lleheny0/nixos-config/blob/main/modules/server/vgm-radio/vgm-radio.liq). Liquidsoap shuffles and plays the entire library of songs, outputting to Icecast. Icecast then broadcasts this audio to the internet. Liquidsoap's harbor is an HTTP server that is configured to pull the current song's metadata and massage it into the simple form expected by the frontend.

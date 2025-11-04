@@ -36,7 +36,7 @@ const loadElements = () => {
  * @param {String} cover - URL to game image
  */
 const displayMetadata = ({ track, game, cover }) => {
-  pageTitle.innerText = `♫ ${game}`;
+  pageTitle.innerText = `${game}`;
   gameInfo.innerText = game;
   trackInfo.innerText = track;
   coverArt.innerHTML = `<img src="${cover}" />`;

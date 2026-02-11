@@ -10,7 +10,8 @@ let audio,
   pageTitle,
   playStop,
   trackInfo,
-  volume;
+  volume,
+  duration = 0;
 
 /**
  * Assigns elements to selector variables.
@@ -237,7 +238,20 @@ const setupEventListeners = () => {
   });
 
   audio.addEventListener("pause", handleStop);
+  audio.addEventListener("error", handleStop);
   audio.addEventListener("ended", setServerDown);
+
+  setInterval(() => {
+    if (!audio.paused && !navigator.userAgent.includes("Chrome")) {
+      if (audio.duration === duration) {
+        handleStop();
+        handlePlay();
+        console.log("Stream hanging, restarting...");
+      } else {
+        duration = audio.duration;
+      }
+    }
+  }, 1000);
 
   navigator.mediaSession?.setActionHandler("play", handlePlay);
   navigator.mediaSession?.setActionHandler("pause", handleStop);

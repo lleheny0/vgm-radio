@@ -10,7 +10,8 @@ let audio,
   pageTitle,
   playStop,
   trackInfo,
-  volume;
+  volume,
+  duration = 0;
 
 /**
  * Assigns elements to selector variables.
@@ -237,10 +238,25 @@ const setupEventListeners = () => {
   });
 
   audio.addEventListener("pause", handleStop);
+  audio.addEventListener("error", handleStop);
   audio.addEventListener("ended", setServerDown);
 
   navigator.mediaSession?.setActionHandler("play", handlePlay);
   navigator.mediaSession?.setActionHandler("pause", handleStop);
+};
+
+const setupWorkarounds = () => {
+  if (navigator.userAgent.includes("Firefox")) {
+    setInterval(() => {
+      if (!audio.paused && audio.duration === duration) {
+        handleStop();
+        handlePlay();
+        console.log("Stream hanging, restarting...");
+      } else {
+        duration = audio.duration;
+      }
+    }, 1000);
+  }
 };
 
 const debugApp = () => {
@@ -256,5 +272,6 @@ window.onload = () => {
   getMetadata();
   setupControls();
   setupEventListeners();
+  setupWorkarounds();
   debugApp();
 };

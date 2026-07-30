@@ -1,6 +1,6 @@
 # VGM Radio
 
-Hosted at [leheny.ddns.net](http://leheny.ddns.net/)
+Hosted at [lukeleheny.com/vgmradio](http://lukeleheny.com/vgmradio/)
 
 ![image](https://github.com/user-attachments/assets/76fab797-4ff4-40dc-9db4-5d92fe47793b)
 

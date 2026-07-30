@@ -110,7 +110,7 @@ const setServerDown = () => {
  * returns an error.
  */
 const getMetadata = () => {
-  fetch("https://lukeleheny.com/metadata")
+  fetch("https://lukeleheny.com/vgmradio/metadata")
     .then((resp) => resp.json())
     .then((data) => {
       displayMetadata(data);
@@ -128,7 +128,7 @@ const getMetadata = () => {
  * a leftover cache from a previous stream.
  */
 const handlePlay = () => {
-  audio.src = `https://lukeleheny.com/vgmradio?t=${new Date().getTime()}`;
+  audio.src = `https://lukeleheny.com/vgmradio/icecast?t=${new Date().getTime()}`;
   audio.load();
   audio.play();
   playStop.src = "assets/stop.png";
